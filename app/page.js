@@ -7,12 +7,19 @@ import Offers from '@/Components/Offers/Offers'
 import Subscribe from '@/Components/Subscribe/Subscribe'
 import Footer from '@/Components/Footer/Footer'
 
-export default function Home() {
+
+import useNewArrivalProducts from '@/hooks/products/useNewArrivalProducts'
+
+export default async function Home() {
+  const [newArrivalProducts, isLoading, error] = await useNewArrivalProducts();
+
+  console.log("newArrivalProducts:---------------", newArrivalProducts);
+
   return (
     <main className={styles.main}>
       <Header />
       <About />
-      <ProductsSlider />
+      <ProductsSlider newArrivalProducts={newArrivalProducts} />
       <Offers />
       <Subscribe />
       <Footer />

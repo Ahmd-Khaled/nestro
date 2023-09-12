@@ -4,6 +4,7 @@
   align-items: center;
   .link {
     img {
+      @include borderRadius(8px);
       pointer-events: none;
     }
   }

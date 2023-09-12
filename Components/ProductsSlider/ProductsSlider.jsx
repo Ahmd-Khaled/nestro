@@ -5,9 +5,14 @@ import styles from "./styles.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import Link from "next/link";
+import useNewArrivalProducts from "@/hooks/products/useNewArrivalProducts";
+import { fetchDataISR, fetchDataSSG } from "@/utils/fetchData";
 
 
-const ProductsSlider = () => {
+const ProductsSlider = ({ newArrivalProducts }) => {
+  // const [newArrivalProducts, isLoading] = useNewArrivalProducts();
+
+
   const carouselRef = useRef();
   const [width, setWidth] = useState(0);
 
@@ -40,12 +45,17 @@ const ProductsSlider = () => {
               dragConstraints={{ left: 0, right: width }}
               className={styles.innerCarousel}
             >
-              <ProductCard
-                img="/images/1612335229.png"
-                link="/"
-                text="قهوة امريكي حبوب 250 غرام"
-              />
-              <ProductCard
+              {
+                newArrivalProducts.map((product, index) => (
+                  <ProductCard
+                    key={product.id}
+                    img={product.image}
+                    link="/"
+                    text={product.title}
+                  />
+                ))
+              }
+              {/* <ProductCard
                 img="/images/1632201114.png"
                 link="/"
                 text="قهوة سريعة الذوبان أظرف"
@@ -74,7 +84,7 @@ const ProductsSlider = () => {
                 img="/images/1612178675.png"
                 link="/"
                 text="مسحوق الهيل"
-              />
+              /> */}
             </motion.ul>
           </motion.div>
         </div>
